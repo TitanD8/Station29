@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     {
         suit = GetComponentInChildren<SuitStats2>();
         weather = GameObject.FindGameObjectWithTag("Weather").GetComponent<Weather>();
-        healthRemaining = lastStats.currentHealth; //PersistantStats.storedHealth;
+        healthRemaining = lastStats.storedHealth; //PersistantStats.storedHealth;
         UIController.Ui.UpdatePlayerHealthUI(healthRemaining);
     }
 
@@ -50,7 +50,7 @@ public class PlayerStats : MonoBehaviour
 
     public void OnDisable()
     {
-        /*PersistantStats.storedHealth*/ lastStats.currentHealth = healthRemaining;
+        /*PersistantStats.storedHealth*/ lastStats.storedHealth = healthRemaining;
     }
 
     public void ApplyColdDamage()

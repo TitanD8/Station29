@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2de6c4abb165e428a73fd6c23efc73, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  currentHealth: 34
+  storedHealth: 100
+  storedClimateControlLevel: 0
+  storedPowerRemaining: 100

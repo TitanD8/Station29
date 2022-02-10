@@ -986,6 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d17d1d85d831649a2a8189f564d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  persistantStats: {fileID: 11400000, guid: 50cc25b9f1496bf448519d855a05cbe2, type: 2}
   climateControlLevel: 0
   maxLevel: 2
   minLevel: -1

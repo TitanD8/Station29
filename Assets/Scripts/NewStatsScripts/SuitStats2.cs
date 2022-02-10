@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SuitStats2 : MonoBehaviour
 {
+    public PersistantPlayerStats persistantStats;
+
     public int climateControlLevel = 0;
     public int maxLevel = 2;
     public int minLevel = -1;
@@ -13,9 +15,9 @@ public class SuitStats2 : MonoBehaviour
 
     public void Start()
     {
-        climateControlLevel = PersistantStats.storedClimateControlLevel;
+        climateControlLevel = persistantStats.storedClimateControlLevel;
         UIController.Ui.UpdateClimateControlUI(climateControlLevel);
-        powerRemaining = PersistantStats.storedPower;
+        powerRemaining = persistantStats.storedPowerRemaining;
         UIController.Ui.UpdatePowerRemainingUI(powerRemaining);
     }
 
@@ -69,8 +71,8 @@ public class SuitStats2 : MonoBehaviour
 
     private void OnDisable()
     {
-        PersistantStats.storedClimateControlLevel = climateControlLevel;
-        PersistantStats.storedPower = powerRemaining;
+        persistantStats.storedClimateControlLevel = climateControlLevel;
+        persistantStats.storedPowerRemaining = powerRemaining;
     }
 
 }

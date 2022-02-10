@@ -6,7 +6,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PersistantPlayerStats : ScriptableObject
 {
-    public int currentHealth;
+    public int storedHealth;
+    public int storedClimateControlLevel;
+    public int storedPowerRemaining;
 }
 
 
