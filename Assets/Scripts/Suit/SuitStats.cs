@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SuitStats2 : MonoBehaviour
+public class SuitStats : MonoBehaviour
 {
     public PersistantPlayerStats persistantStats;
 

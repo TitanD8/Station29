@@ -9,12 +9,12 @@ public class PlayerStats : MonoBehaviour
     public int bodyTemperature = 0;
     public int healthRemaining = 100;
     public Weather weather;
-    public SuitStats2 suit;
+    public SuitStats suit;
     public bool damagingWeather;
 
     private void Start()
     {
-        suit = GetComponentInChildren<SuitStats2>();
+        suit = GetComponentInChildren<SuitStats>();
         weather = GameObject.FindGameObjectWithTag("Weather").GetComponent<Weather>();
         healthRemaining = lastStats.storedHealth; //PersistantStats.storedHealth;
         UIController.Ui.UpdatePlayerHealthUI(healthRemaining);
