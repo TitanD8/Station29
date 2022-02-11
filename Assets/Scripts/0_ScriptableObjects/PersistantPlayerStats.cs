@@ -9,6 +9,7 @@ public class PersistantPlayerStats : ScriptableObject
     public int storedHealth;
     public int storedClimateControlLevel;
     public int storedPowerRemaining;
+    public int storedPowerDrain;
 }
 
 

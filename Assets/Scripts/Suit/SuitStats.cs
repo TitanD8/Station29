@@ -11,37 +11,69 @@ public class SuitStats : MonoBehaviour
     public int minLevel = -1;
 
     public int powerRemaining = 100;
+    public int powerDrain;
     public bool powerDraining = false;
 
     public void Start()
     {
         climateControlLevel = persistantStats.storedClimateControlLevel;
         UIController.Ui.UpdateClimateControlUI(climateControlLevel);
+        powerDrain = persistantStats.storedPowerDrain;
         powerRemaining = persistantStats.storedPowerRemaining;
         UIController.Ui.UpdatePowerRemainingUI(powerRemaining);
     }
 
     public void DecreaseClimateControl()
     {
-        if(climateControlLevel > minLevel)
+        if (IsInvoking("ApplyPowerDrain"))
+        {
+            CancelInvoke("ApplyPowerDrain");
+            powerDraining = false;
+            Debug.Log("Invoke Cancelled (SuitStats)");
+        }
+
+        if (climateControlLevel > minLevel)
         {
             climateControlLevel = climateControlLevel - 1;
             UIController.Ui.UpdateClimateControlUI(climateControlLevel);
+            if (climateControlLevel == 1)
+            {
+                powerDrain = powerDrain - 1;
+            }
+            if (climateControlLevel == 0)
+            {
+                powerDrain = powerDrain - 1;
+            }
         }
     }
 
     public void IncreaseClimateControl()
     {
+        if(IsInvoking("ApplyPowerDrain"))
+        {
+            CancelInvoke("ApplyPowerDrain");
+            powerDraining = false;
+            Debug.Log("Invoke Cancelled (SuitStats)");
+        }
+
         if(climateControlLevel < maxLevel)
         {
             climateControlLevel = climateControlLevel + 1;
             UIController.Ui.UpdateClimateControlUI(climateControlLevel);
         }
+        if(climateControlLevel == 1)
+        {
+            powerDrain = powerDrain + 1;
+        }
+        if(climateControlLevel == 2)
+        {
+            powerDrain = powerDrain + 1;
+        }
     }
 
     public void ApplyPowerDrain()
     {
-        powerRemaining = powerRemaining - climateControlLevel;
+        powerRemaining = powerRemaining - powerDrain;
         UIController.Ui.UpdatePowerRemainingUI(powerRemaining);
     }
 
@@ -56,23 +88,24 @@ public class SuitStats : MonoBehaviour
             DecreaseClimateControl();
         }
 
-        if (climateControlLevel > 0 && powerDraining == false)
+        if (powerDrain > 0 && powerDraining == false)
         {
             InvokeRepeating("ApplyPowerDrain", 1f, 1f);
             powerDraining = true;
         }
-        else if (climateControlLevel < 0 && powerDraining == true)
+        else if(powerDrain <= 0 && powerDraining == true)
         {
             CancelInvoke("ApplyPowerDrain");
             powerDraining = false;
+            Debug.Log("Invoke Cancelled (SuitStats)");
         }
-        else { return; }
     }
 
     private void OnDisable()
     {
         persistantStats.storedClimateControlLevel = climateControlLevel;
         persistantStats.storedPowerRemaining = powerRemaining;
+        persistantStats.storedPowerDrain = powerDrain;
     }
 
 }
